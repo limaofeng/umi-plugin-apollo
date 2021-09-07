@@ -10,6 +10,7 @@ import generatePageSchemaFile from './functions/pageSchemaFile';
 import generateRuntimeFile from './functions/runtimeFile';
 import generateLinkFile from './functions/linkFile';
 import { getOptionsFile } from './functions/utils';
+import pageBycommands from './commands/page/index';
 
 const joinApolloPath = (api: IApi) => (path: string) => join(api.paths.absTmpPath!, 'apollo', path);
 const joinAbsApolloPath = (api: IApi) => (path: string) => join(api.paths.absTmpPath!, 'apollo', path);
@@ -157,7 +158,7 @@ export default function(api: IApi) {
 
   api.registerGenerator({
     key: 'apollo:page',
-    Generator: require('./commands/generate/generators/page').default(api),
+    Generator: pageBycommands(api),
   });
 
   api.addUmiExports(() => ({
