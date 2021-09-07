@@ -1,3 +1,12 @@
+## [0.1.5](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.4...v0.1.5) (2021-09-07)
+
+
+### Bug Fixes
+
+* 解决由于 commads 造成启动 bug ([424748c](https://github.com/limaofeng/umi-plugin-apollo/commit/424748c5915e8dd1b23421e406138229bd0c334a))
+
+
+
 ## 0.1.4 (2021-09-07)
 
 
