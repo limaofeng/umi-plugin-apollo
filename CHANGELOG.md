@@ -1,3 +1,12 @@
+## 0.1.4 (2021-09-07)
+
+
+### Features
+
+* 使用 tsdx 作为脚手架工具 ([a0a0883](https://github.com/limaofeng/umi-plugin-apollo/commit/a0a0883c2f254a5df1bbf4057fc023f528571e92))
+
+
+
 ## [0.1.3](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.0...v0.1.3) (2021-07-19)
 
 
