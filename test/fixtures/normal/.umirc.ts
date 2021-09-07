@@ -1,4 +1,6 @@
-
 export default {
-  plugins: [require.resolve('../../../lib')]
-}
+  plugins: [require.resolve('../../../dist')],
+  apollo: {
+    uri: 'https://countries.trevorblades.com/',
+  },
+};

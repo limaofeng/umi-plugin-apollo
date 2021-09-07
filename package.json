@@ -19,7 +19,9 @@
     "start": "tsdx watch",
     "start:dev": "cross-env APP_ROOT=example umi dev",
     "build": "tsdx build",
-    "test": "tsdx test --passWithNoTests",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage",
+    "test:update": "umi-test --updateSnapshot",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
@@ -59,7 +61,6 @@
     }
   ],
   "dependencies": {
-    "lodash": "^4.17.21",
     "@apollo/client": "^3.1.3",
     "apollo-link-batch-http": "^1.2.14",
     "apollo-link-context": "^1.0.20",
@@ -67,6 +68,7 @@
     "apollo-link-logger": "^1.2.3",
     "apollo-link-ws": "^1.0.20",
     "graphql": "^15.5.1",
+    "lodash": "^4.17.21",
     "subscriptions-transport-ws": "^0.9.16"
   },
   "devDependencies": {
@@ -85,10 +87,12 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "size-limit": "^5.0.3",
+    "test-umi-plugin": "^0.1.0",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
     "typescript": "^4.4.2",
-    "umi": "^3.5.17"
+    "umi": "^3.5.17",
+    "umi-test": "^1.9.6"
   },
   "resolutions": {
     "**/@typescript-eslint/eslint-plugin": "^4.1.1",
@@ -98,9 +102,6 @@
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "./__mocks__/fileMock.js",
       "\\.(css|less)$": "identity-obj-proxy"
-    },
-    "setupFiles": [
-      "<rootDir>/test/globals-test.ts"
-    ]
+    }
   }
 }
