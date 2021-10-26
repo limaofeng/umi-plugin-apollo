@@ -1,3 +1,12 @@
+## [0.1.6](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.5...v0.1.6) (2021-10-26)
+
+
+### Features
+
+* 添加 Upload 插件 ([e5cecf8](https://github.com/limaofeng/umi-plugin-apollo/commit/e5cecf8fb68721b525c3e3f49f30f9e01f51cac1))
+
+
+
 ## [0.1.5](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.4...v0.1.5) (2021-09-07)
 
 
