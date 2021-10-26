@@ -3,11 +3,13 @@ import styles from './index.css';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
 
+import UploadDemo from './UploadDemo';
+
 const CONTINENTS_QUERY = gql`
   query {
-    continents {
-      code
-      name
+    continents: articleChannels {
+      code: id
+      name: name
     }
   }
 `;
@@ -30,6 +32,7 @@ export default () => {
           </li>
         ))}
       </ul>
+      <UploadDemo />
     </div>
   );
 };
