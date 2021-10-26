@@ -1,11 +1,12 @@
-import { HttpLink } from '@apollo/client';
-import { BatchHttpLink } from 'apollo-link-batch-http';
 import { WebSocketLink } from 'apollo-link-ws';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { createUploadLink } from 'apollo-upload-client';
+import { buildAxiosFetch } from '@lifeomic/axios-fetch';
+import axios from 'axios';
+
 import * as options from '{{{optionsFile}}}';
 
 const uri = '{{{uri}}}';
-const batch = {{batch}};
 const httpLinkOptions = options.httpLinkOptions || {};
 
 const createDefaultHttpLink = () => {
@@ -29,13 +30,17 @@ const createDefaultHttpLink = () => {
     });
     remoteLink = new WebSocketLink(client);
   } else {
-    remoteLink = batch ? new BatchHttpLink({ uri: '/graphql', ...httpLinkOptions }) : new HttpLink({ uri, ...httpLinkOptions });
+    remoteLink = createUploadLink({
+      uri,
+      fetch: buildAxiosFetch(axios, (config, input, init) => ({
+        ...config,
+        onUploadProgress: init.onUploadProgress,
+      })),
+    });
   }
   return remoteLink;
 };
 
-const httpLink = options.makeHttpLink
-  ? options.makeHttpLink({ uri, httpLinkOptions })
-  : createDefaultHttpLink();
+const httpLink = options.makeHttpLink ? options.makeHttpLink({ uri, httpLinkOptions }) : createDefaultHttpLink();
 
 export default httpLink;

@@ -22,7 +22,6 @@ export interface IOptions {
   uri: string;
   mock: boolean;
   logging: boolean;
-  batch: boolean;
   options: string;
 }
 
@@ -100,14 +99,12 @@ export default function(api: IApi) {
         uri: process.env.GRAPHQL_URI || 'http://localhost:3000/graphql',
         mock: ['true', '1', 'yes'].indexOf((process.env.MOCK || 'false').toLowerCase()) !== -1,
         logging: process.env.NODE_ENV === 'development',
-        batch: false,
       },
       schema(joi) {
         return joi.object({
           uri: joi.string(),
           mock: joi.boolean(),
           logging: joi.boolean(),
-          batch: joi.boolean(),
           options: joi.string(),
         });
       },
