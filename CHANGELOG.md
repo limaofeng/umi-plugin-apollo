@@ -1,3 +1,12 @@
+## [0.1.7](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.6...v0.1.7) (2022-03-29)
+
+
+### Features
+
+* fetch 函数支持 signal 选项 ([babafa1](https://github.com/limaofeng/umi-plugin-apollo/commit/babafa12c2b01c299e5461b955fb50d93bbdb128))
+
+
+
 ## [0.1.6](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.5...v0.1.6) (2021-10-26)
 
 
