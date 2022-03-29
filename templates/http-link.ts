@@ -34,6 +34,7 @@ const createDefaultHttpLink = () => {
       uri,
       fetch: buildAxiosFetch(axios, (config, input, init) => ({
         ...config,
+        signal: init.signal,
         onUploadProgress: init.onUploadProgress,
       })),
     });
