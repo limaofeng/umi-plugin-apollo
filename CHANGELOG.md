@@ -1,3 +1,12 @@
+## [0.1.8](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.7...v0.1.8) (2022-05-04)
+
+
+### Bug Fixes
+
+* 修复重新授权的判断 ([6383d68](https://github.com/limaofeng/umi-plugin-apollo/commit/6383d68fa27e58793a6e236f65596136a30c2811))
+
+
+
 ## [0.1.7](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.6...v0.1.7) (2022-03-29)
 
 
