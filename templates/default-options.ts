@@ -40,16 +40,9 @@ if (token) {
 }
 
 const errorLink = onError(error => {
-  const { networkError, response, graphQLErrors } = error;
-  if (networkError && networkError.name === 'ServerError' && (networkError as any).statusCode === 401) {
-    token && localStorage.removeItem('loginCredentials');
-  } else {
-    const message = graphQLErrors ? graphQLErrors[0].message : (networkError as Error).message;
-    console.error('未处理异常:', message);
-    // onNetworkError && onNetworkError({
-    //   message,
-    //   response
-    // } as any)
+  const { graphQLErrors } = error;
+  if (graphQLErrors?.some(err => err.extensions.code == '100401')) {
+    token && tokenHelper.resetToken()
   }
 });
 

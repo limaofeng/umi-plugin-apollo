@@ -5,6 +5,7 @@ import { buildAxiosFetch } from '@lifeomic/axios-fetch';
 import axios from 'axios';
 
 import * as options from '{{{optionsFile}}}';
+import tokenHelper from './TokenHelper';
 
 const uri = '{{{uri}}}';
 const httpLinkOptions = options.httpLinkOptions || {};
@@ -17,14 +18,11 @@ const createDefaultHttpLink = () => {
       reconnect: true,
       connectionParams: {
         get authorization() {
-          const loginCredentials = JSON.parse(localStorage.getItem('loginCredentials')!);
-          if (!loginCredentials) {
+          const token =  tokenHelper.withToken();
+          if (!token) {
             return;
           }
-          if (!loginCredentials.token) {
-            return;
-          }
-          return `bearer ${loginCredentials.token}`;
+          return `bearer ${token}`;
         },
       },
     });
