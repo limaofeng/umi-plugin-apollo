@@ -41,8 +41,8 @@ if (token) {
 
 const errorLink = onError(error => {
   const { graphQLErrors } = error;
-  if (graphQLErrors?.some(err => err.extensions.code == '100401')) {
-    token && tokenHelper.resetToken()
+  if (graphQLErrors?.some(err => err.extensions?.code === '100401')) {
+    token && tokenHelper.resetToken();
   }
 });
 

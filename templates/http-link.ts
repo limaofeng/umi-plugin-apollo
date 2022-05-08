@@ -18,9 +18,9 @@ const createDefaultHttpLink = () => {
       reconnect: true,
       connectionParams: {
         get authorization() {
-          const token =  tokenHelper.withToken();
+          const token = tokenHelper.withToken();
           if (!token) {
-            return;
+            return undefined;
           }
           return `bearer ${token}`;
         },
