@@ -1,3 +1,12 @@
+## [0.1.9](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.8...v0.1.9) (2022-05-08)
+
+
+### Bug Fixes
+
+* error 可能并一定包含 code ([d20927c](https://github.com/limaofeng/umi-plugin-apollo/commit/d20927c4cb12c248c8c7032467776d8e34ed386b))
+
+
+
 ## [0.1.8](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.7...v0.1.8) (2022-05-04)
 
 
