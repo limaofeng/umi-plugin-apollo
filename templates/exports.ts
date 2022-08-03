@@ -1,2 +1,2 @@
-export { default as TokenHelper } from './TokenHelper';
+export { default as tokenHelper } from './TokenHelper';
 export { client as apolloClient } from './index';
