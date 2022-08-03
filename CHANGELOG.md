@@ -1,3 +1,12 @@
+## [0.1.10](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.9...v0.1.10) (2022-08-03)
+
+
+### Features
+
+* 暴露 TokenHelper 与 apolloClient ([def6a7c](https://github.com/limaofeng/umi-plugin-apollo/commit/def6a7c7e8d388d2a67e1f51fe7a47c987faba9d))
+
+
+
 ## [0.1.9](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.8...v0.1.9) (2022-05-08)
 
 
