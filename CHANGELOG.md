@@ -1,3 +1,12 @@
+## [0.1.12](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.11...v0.1.12) (2022-08-03)
+
+
+### Bug Fixes
+
+* 导出变量名修改(tokenHelper) ([c8757a8](https://github.com/limaofeng/umi-plugin-apollo/commit/c8757a8129ab3136aac73327346cc07951a33669))
+
+
+
 ## [0.1.11](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.10...v0.1.11) (2022-08-03)
 
 
