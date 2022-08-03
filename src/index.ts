@@ -141,7 +141,7 @@ export default function(api: IApi) {
     bag.generateOptionsFile();
   });
 
-  const files = ['TokenHelper.ts'];
+  const files = ['TokenHelper.ts', 'exports.ts'];
 
   files.map(fileName => cenerateFile(api, fileName));
 
