@@ -160,6 +160,6 @@ export default function(api: IApi) {
 
   api.addUmiExports(() => ({
     exportAll: true,
-    source: api.utils.winPath(join(pluginTmpDir, 'index')),
+    source: api.utils.winPath(join(pluginTmpDir, 'exports')),
   }));
 }
