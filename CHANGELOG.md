@@ -1,3 +1,12 @@
+## [0.1.11](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.10...v0.1.11) (2022-08-03)
+
+
+### Features
+
+* 优化 exports ([5597c08](https://github.com/limaofeng/umi-plugin-apollo/commit/5597c085faf162069bdbb8d01a0de069af793d7b))
+
+
+
 ## [0.1.10](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.9...v0.1.10) (2022-08-03)
 
 
