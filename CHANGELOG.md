@@ -1,3 +1,12 @@
+# [0.2.0](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.12...v0.2.0) (2022-12-21)
+
+
+### Features
+
+* 支持Subscription 类型 ([90abecb](https://github.com/limaofeng/umi-plugin-apollo/commit/90abecb6b238340bfb2ad56485e340b79a78796a))
+
+
+
 ## [0.1.12](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.1.11...v0.1.12) (2022-08-03)
 
 
