@@ -1,19 +1,33 @@
-import { WebSocketLink } from 'apollo-link-ws';
-import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { getMainDefinition } from '@apollo/client/utilities';
 import { createUploadLink } from 'apollo-upload-client';
 import { buildAxiosFetch } from '@lifeomic/axios-fetch';
+import { split } from '@apollo/client';
+import { WebSocketLink } from '@apollo/client/link/ws';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
 import axios from 'axios';
 
-import * as options from '{{{optionsFile}}}';
 import tokenHelper from './TokenHelper';
 
-const uri = '{{{uri}}}';
+import * as options from '{{{optionsFile}}}';
+
+const url = '{{{url}}}';
+const wsUrl = '{{{wsUrl}}}';
 const httpLinkOptions = options.httpLinkOptions || {};
 
 const createDefaultHttpLink = () => {
-  let remoteLink;
-  if (uri.startsWith('ws')) {
-    const client = new SubscriptionClient(uri, {
+  const remoteLink = createUploadLink({
+    uri: url,
+    fetch: buildAxiosFetch(axios, (config, input, init) => ({
+      ...config,
+      signal: init.signal,
+      onUploadProgress: init.onUploadProgress,
+    })),
+  });
+  if (!wsUrl) {
+    return remoteLink;
+  }
+  const wsLink = new WebSocketLink(
+    new SubscriptionClient(wsUrl, {
       lazy: true,
       reconnect: true,
       connectionParams: {
@@ -25,21 +39,18 @@ const createDefaultHttpLink = () => {
           return `bearer ${token}`;
         },
       },
-    });
-    remoteLink = new WebSocketLink(client);
-  } else {
-    remoteLink = createUploadLink({
-      uri,
-      fetch: buildAxiosFetch(axios, (config, input, init) => ({
-        ...config,
-        signal: init.signal,
-        onUploadProgress: init.onUploadProgress,
-      })),
-    });
-  }
-  return remoteLink;
+    })
+  );
+  return split(
+    ({ query }) => {
+      const definition = getMainDefinition(query);
+      return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
+    },
+    wsLink,
+    remoteLink
+  );
 };
 
-const httpLink = options.makeHttpLink ? options.makeHttpLink({ uri, httpLinkOptions }) : createDefaultHttpLink();
+const httpLink = options.makeHttpLink ? options.makeHttpLink({ url, wsUrl, httpLinkOptions }) : createDefaultHttpLink();
 
 export default httpLink;

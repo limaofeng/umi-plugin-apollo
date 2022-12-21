@@ -82,7 +82,8 @@ export default (api: IApi, bag: IBag) =>
         path: linkPath,
         content: api.utils.Mustache.render(linkTemplate, {
           optionsFile: optionsFile,
-          uri: options.uri,
+          url: options.url,
+          wsUrl: options.wsUrl,
         }),
       });
     }

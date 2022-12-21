@@ -19,7 +19,8 @@ const joinSrcPath = (api: IApi) => (path: string) => join(api.paths.absSrcPath!,
 const joinAbsSrcPath = (api: IApi) => (path: string) => join(api.paths.absSrcPath!, path);
 
 export interface IOptions {
-  uri: string;
+  url: string;
+  wsUrl?: string;
   mock: boolean;
   logging: boolean;
   options: string;
@@ -96,13 +97,15 @@ export default function(api: IApi) {
     key: 'apollo',
     config: {
       default: {
-        uri: process.env.GRAPHQL_URI || 'http://localhost:3000/graphql',
+        url: process.env.GRAPHQL_URL || 'http://localhost:3000/graphql',
+        wsUrl: process.env.GRAPHQL_WS_URL || 'ws://localhost:3000/subscriptions',
         mock: ['true', '1', 'yes'].indexOf((process.env.MOCK || 'false').toLowerCase()) !== -1,
         logging: process.env.NODE_ENV === 'development',
       },
       schema(joi) {
         return joi.object({
-          uri: joi.string(),
+          url: joi.string(),
+          wsUrl: joi.string(),
           mock: joi.boolean(),
           logging: joi.boolean(),
           options: joi.string(),
