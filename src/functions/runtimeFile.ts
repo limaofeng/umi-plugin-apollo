@@ -2,7 +2,7 @@ import { readFileSync } from "fs";
 
 import type { IApi } from "umi";
 
-import { IBag } from "..";
+import type { IBag } from "../index";
 
 export default (api: IApi, bag: IBag) =>
   api.onGenerateFiles(() => {

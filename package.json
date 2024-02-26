@@ -9,7 +9,7 @@
     "dev": "father dev",
     "build": "father build",
     "example": "APP_ROOT=example umi dev",
-    "lint": "eslint . --fix",
+    "lint": "umi lint --fix",
     "size": "size-limit",
     "analyze": "size-limit --why",
     "postinstall": "husky install",

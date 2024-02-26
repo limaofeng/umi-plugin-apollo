@@ -3,7 +3,7 @@
 // import assert from 'assert';
 // import makePageGenerator from 'umi-build-dev/lib/plugins/commands/generate/generators/page';
 import type { IApi } from "umi";
-import { Generator } from "@umijs/utils";
+// import { Generator } from "@umijs/utils";
 
 // const capitalizeFirstLetter = x => `${x.charAt(0).toUpperCase()}${x.slice(1)}`;
 // const getPath = fullPath => (fullPath.endsWith('/index') ? fullPath.replace(/\/index$/, '') : fullPath);

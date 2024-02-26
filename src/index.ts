@@ -2,7 +2,6 @@ import { existsSync, mkdirSync, readFileSync } from "fs";
 import { join } from "path";
 
 import type { IApi } from "umi";
-import { GeneratorType } from "@umijs/core";
 import { Mustache } from "@umijs/utils";
 
 import { parseApolloFiles } from "./functions/utils";
@@ -12,7 +11,7 @@ import generatePageSchemaFile from "./functions/pageSchemaFile";
 import generateRuntimeFile from "./functions/runtimeFile";
 import generateLinkFile from "./functions/linkFile";
 import { getOptionsFile } from "./functions/utils";
-import pageBycommands from "./commands/page/index";
+// import pageBycommands from "./commands/page/index";
 
 const joinApolloPath = (api: IApi) => (path: string) =>
   join(api.paths.absTmpPath!, "apollo", path);
