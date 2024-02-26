@@ -1,6 +1,7 @@
 {
   "name": "@asany/umi-plugin-apollo",
   "author": "李茂峰",
+  "repository": "https://github.com/limaofeng/umi-plugin-apollo",
   "version": "0.2.5",
   "main": "dist/cjs/index.js",
   "types": "dist/cjs/index.d.ts",
@@ -27,7 +28,8 @@
     "email": "limaofeng@msn.com"
   },
   "files": [
-    "dist"
+    "dist",
+    "templates"
   ],
   "engines": {
     "node": ">=18"
@@ -63,6 +65,12 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
   },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
