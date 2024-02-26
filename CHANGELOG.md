@@ -1,3 +1,12 @@
+## [0.2.5](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.2.4...v0.2.5) (2024-02-26)
+
+
+### Bug Fixes
+
+* Update author name in package.json ([b0a6c03](https://github.com/limaofeng/umi-plugin-apollo/commit/b0a6c03dcdfe1a7a6e3ae055f63c76140d04910b))
+
+
+
 ## [0.2.4](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.2.3...v0.2.4) (2024-02-26)
 
 
