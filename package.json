@@ -1,6 +1,6 @@
 {
   "name": "@asany/umi-plugin-apollo",
-  "author": "李茂峰 <limaofeng@msn.com>",
+  "author": "李茂峰",
   "version": "0.2.4",
   "main": "dist/cjs/index.js",
   "types": "dist/cjs/index.d.ts",
