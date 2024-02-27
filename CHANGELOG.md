@@ -1,3 +1,12 @@
+## [0.4.3](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.4.2...v0.4.3) (2024-02-27)
+
+
+### Features
+
+* Update apolloProvider to use apolloClient ([d34487d](https://github.com/limaofeng/umi-plugin-apollo/commit/d34487d1fb189f02b06fdc3679b62c49198ed2e4))
+
+
+
 ## [0.4.2](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.4.1...v0.4.2) (2024-02-27)
 
 
