@@ -1,3 +1,12 @@
+## [0.4.2](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.4.1...v0.4.2) (2024-02-27)
+
+
+### Features
+
+*  添加 graphql-tag/loader ([173016f](https://github.com/limaofeng/umi-plugin-apollo/commit/173016f2db120b846b0a2e7ae1a251d757c0b485))
+
+
+
 ## [0.4.1](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.4.0...v0.4.1) (2024-02-27)
 
 
