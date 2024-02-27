@@ -53,11 +53,11 @@ const link = options.makeLink
   ? options.makeLink({ remoteLink, extraLinks })
   : ApolloLink.from([...extraLinks, remoteLink]);
 
-export const client = options.makeClient
+export const apolloClient = options.makeClient
   ? options.makeClient({ link, cache, clientOptions })
   : new ApolloClient({ link, cache, ...clientOptions });
 
-export const provider = options.makeProvider
+export const apolloProvider = options.makeProvider
   ? options.makeProvider({ client, providerOptions })
   : ({ children }: any) => (
       <ApolloProvider client={client} {...providerOptions}>

@@ -60,7 +60,7 @@ const getMergeResolvers = (resolvers: any[]) =>
 export default (api: IApi, bag: IBag) =>
   api.onGenerateFiles(() => {
     const options: IOptions = api.config.apollo;
-    const linkPath = "apollo/remote-link.ts";
+    const linkPath = "remote-link.ts";
     const linkTemplatePath = bag.joinApolloTemplatePath(
       options.mock ? "mock-schema-link.ts" : "http-link.ts",
     );
@@ -86,7 +86,6 @@ export default (api: IApi, bag: IBag) =>
       const optionsFile = winPath(bag.optionsFile!);
       api.writeTmpFile({
         path: linkPath,
-        noPluginDir: true,
         content: Mustache.render(linkTemplate, {
           optionsFile: optionsFile,
           url: options.url,
@@ -99,7 +98,6 @@ export default (api: IApi, bag: IBag) =>
       return;
     }
 
-    const sampleSchemaPath = bag.joinApolloPath("sample.schema.graphql");
     const sampleSchemaTemplatePath = bag.joinApolloTemplatePath(
       "sample.schema.graphql",
     );
@@ -109,5 +107,9 @@ export default (api: IApi, bag: IBag) =>
       "utf-8",
     );
     const sampleSchemaContent = sampleSchemaTemplate;
-    writeFileSync(sampleSchemaPath, sampleSchemaContent);
+
+    api.writeTmpFile({
+      path: "sample.schema.graphql",
+      content: sampleSchemaContent,
+    });
   });

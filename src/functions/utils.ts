@@ -110,8 +110,7 @@ export const getOptionsFileInternal = (
     );
     console.error("defaultOptionsTemplatePath", defaultOptionsTemplatePath);
     api.writeTmpFile({
-      path: "apollo/options.ts",
-      noPluginDir: true,
+      path: "options.ts",
       content: Mustache.render(defaultOptionsContent, {
         logging: opts.logging,
       }),

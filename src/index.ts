@@ -14,9 +14,9 @@ import { getOptionsFile } from "./functions/utils";
 // import pageBycommands from "./commands/page/index";
 
 const joinApolloPath = (api: IApi) => (path: string) =>
-  join(api.paths.absTmpPath!, "apollo", path);
+  join(api.paths.absTmpPath!, "plugin-apollo", path);
 const joinAbsApolloPath = (api: IApi) => (path: string) =>
-  join(api.paths.absTmpPath!, "apollo", path);
+  join(api.paths.absTmpPath!, "plugin-apollo", path);
 const joinApolloTemplatePath = () => (path: string) =>
   join(__dirname, "../../templates", path);
 const joinSrcPath = (api: IApi) => (path: string) =>
@@ -37,13 +37,12 @@ const joinTemplatePath = (path: string) =>
 
 const cenerateFile = (api: IApi, fileName: string) =>
   api.onGenerateFiles(() => {
-    const indexPath = `apollo/${fileName}`;
+    const indexPath = `${fileName}`;
 
     const templatePath = joinTemplatePath(fileName);
     const indexTemplate = readFileSync(templatePath, "utf-8");
     api.writeTmpFile({
       path: indexPath,
-      noPluginDir: true,
       content: Mustache.render(indexTemplate, api.config.app),
     });
   });
@@ -140,6 +139,8 @@ export default function (api: IApi) {
     api: api,
   }) as any;
 
+  console.log(bag.joinAbsApolloPath(""));
+
   api.chainWebpack((memo) => {
     memo.module
       .rule("graphql")
@@ -159,7 +160,7 @@ export default function (api: IApi) {
     bag.generateOptionsFile();
   });
 
-  const files = ["TokenHelper.ts", "exports.ts"];
+  const files = ["TokenHelper.ts"];
 
   files.map((fileName) => cenerateFile(api, fileName));
 
@@ -169,7 +170,15 @@ export default function (api: IApi) {
   generateLinkFile(api, bag);
   generateRuntimeFile(api, bag);
 
-  api.addRuntimePlugin(() => join(api.paths.absTmpPath!, "apollo/runtime"));
+  api.addRuntimePlugin(() => join(api.paths.absTmpPath!, "plugin-apollo/runtime"));
+
+  // api.writeTmpFile({ 
+  //   path: 'index.ts', 
+  //   content: ` 
+  //   export { setLocale, getLocale, getIntl, useIntl, injectIntl, formatMessage, FormattedMessage } from './localeExports.ts'; 
+  //   export { SelectLang } from './SelectLang.tsx'; 
+  //   `, 
+  // }); 
 
   // const apolloPage = pageBycommands(api);
 

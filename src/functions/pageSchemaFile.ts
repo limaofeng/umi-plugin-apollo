@@ -23,7 +23,6 @@ const buildPrintSchemas = (schemas: any[]) =>
 
 export default (api: IApi, bag: IBag) =>
   api.onGenerateFiles(() => {
-    const path = bag.joinApolloPath("pageSchema.ts");
     const tplPath = bag.joinApolloTemplatePath("pageSchema.ts");
 
     const importSchemas = buildImportSchemas(bag.schemas);
@@ -34,5 +33,8 @@ export default (api: IApi, bag: IBag) =>
       .replace("// <% LoadImportPageSchemas %>", importSchemas)
       .replace("# <% LoadPrintPageSchemas %>", printSchemas);
 
-    writeFileSync(path, content);
+    api.writeTmpFile({
+      path: "pageSchema.ts",
+      content,
+    })
   });

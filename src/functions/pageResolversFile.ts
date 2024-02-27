@@ -30,7 +30,6 @@ const buildMergeResolvers = (resolvers: any[]) =>
 
 export default (api: IApi, bag: IBag) =>
   api.onGenerateFiles(() => {
-    const path = bag.joinApolloPath("pageResolvers.ts");
     const tplPath = bag.joinApolloTemplatePath("pageResolvers.ts");
 
     const importResolvers = buildImportResolvers(bag.resolvers);
@@ -43,5 +42,8 @@ export default (api: IApi, bag: IBag) =>
       .replace("// <% LoadMergeDefaults %>", mergeDefaults)
       .replace("// <% LoadMergeResolvers %>", mergeResolvers);
 
-    writeFileSync(path, content);
+      api.writeTmpFile({
+        path: "pageResolvers.ts",
+        content,
+      })
   });

@@ -1,7 +1,7 @@
 import React from "react";
 
-import { provider } from "./index";
+import { apolloProvider } from "./index";
 
 export function rootContainer(container: React.ReactNode) {
-  return React.createElement(provider, null, container);
+  return React.createElement(apolloProvider, null, container);
 }

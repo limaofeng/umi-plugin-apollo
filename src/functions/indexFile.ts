@@ -8,7 +8,7 @@ import { IBag, IOptions } from "..";
 
 export default (api: IApi, bag: IBag) =>
   api.onGenerateFiles(() => {
-    const indexPath = "apollo/index.tsx";
+    const indexPath = "index.tsx";
     const templatePath = bag.joinApolloTemplatePath("index.tsx");
     const optionsFile = winPath(bag.optionsFile!);
     const options: IOptions = api.config.apollo;
@@ -17,7 +17,6 @@ export default (api: IApi, bag: IBag) =>
 
     api.writeTmpFile({
       path: indexPath,
-      noPluginDir: true,
       content: Mustache.render(indexTemplate, {
         OptionsFile: optionsFile,
         logging: options.logging,
