@@ -1,3 +1,12 @@
+## [0.4.1](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.4.0...v0.4.1) (2024-02-27)
+
+
+### Features
+
+* Add build step to publish workflow ([d6b36f2](https://github.com/limaofeng/umi-plugin-apollo/commit/d6b36f2cff7251cbab13ee822b45fe691571afa8))
+
+
+
 # [0.4.0](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.3.0...v0.4.0) (2024-02-27)
 
 
