@@ -58,9 +58,9 @@ export const apolloClient = options.makeClient
   : new ApolloClient({ link, cache, ...clientOptions });
 
 export const apolloProvider = options.makeProvider
-  ? options.makeProvider({ client, providerOptions })
+  ? options.makeProvider({ client: apolloClient, providerOptions })
   : ({ children }: any) => (
-      <ApolloProvider client={client} {...providerOptions}>
+      <ApolloProvider client={apolloClient} {...providerOptions}>
         {children}
       </ApolloProvider>
     );
