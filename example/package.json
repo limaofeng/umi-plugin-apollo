@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "author": "李茂峰 <limaofeng@msn.com>",
+  "scripts": {
+    "dev": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi setup",
+    "setup": "umi setup",
+    "start": "npm run dev"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.9.5",
+    "@lifeomic/axios-fetch": "^3.0.1",
+    "apollo-link-context": "^1.0.20",
+    "apollo-link-error": "^1.1.13",
+    "apollo-link-logger": "^2.0.1",
+    "apollo-upload-client": "^16.0.0",
+    "axios": "^1.6.7",
+    "graphql": "^15.8.0",
+    "lodash": "^4.17.21",
+    "subscriptions-transport-ws": "^0.11.0",
+    "umi": "^4.0.66",
+    "umi-plugin-apollo": "file:/Users/limaofeng/Workspace/my/asany/umi-plugin-apollo"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "typescript": "^5.0.3"
+  },
+  "version": "0.0.1"
+}

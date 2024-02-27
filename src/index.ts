@@ -11,7 +11,6 @@ import generatePageSchemaFile from "./functions/pageSchemaFile";
 import generateRuntimeFile from "./functions/runtimeFile";
 import generateLinkFile from "./functions/linkFile";
 import { getOptionsFile } from "./functions/utils";
-// import pageBycommands from "./commands/page/index";
 
 const joinApolloPath = (api: IApi) => (path: string) =>
   join(api.paths.absTmpPath!, "plugin-apollo", path);
@@ -139,16 +138,19 @@ export default function (api: IApi) {
     api: api,
   }) as any;
 
-  console.log(bag.joinAbsApolloPath(""));
-
   api.chainWebpack((memo) => {
+    const GQL_REG = /\.(graphql|gql)$/
+
+    memo.module.rule('asset').exclude.add(GQL_REG).end();
+    
     memo.module
-      .rule("graphql")
-      .test(/\.(graphql|gql)$/)
+      .rule('graphql')
+      .test(GQL_REG)
       .exclude.add(/node_modules/)
       .end()
-      .use("graphql-loader")
-      .loader("graphql-tag/loader");
+      .use('graphql-tag')
+      .loader('graphql-tag/loader')
+      .end()
     return memo;
   });
 
@@ -172,31 +174,4 @@ export default function (api: IApi) {
 
   api.addRuntimePlugin(() => join(api.paths.absTmpPath!, "plugin-apollo/runtime"));
 
-  // api.writeTmpFile({ 
-  //   path: 'index.ts', 
-  //   content: ` 
-  //   export { setLocale, getLocale, getIntl, useIntl, injectIntl, formatMessage, FormattedMessage } from './localeExports.ts'; 
-  //   export { SelectLang } from './SelectLang.tsx'; 
-  //   `, 
-  // }); 
-
-  // const apolloPage = pageBycommands(api);
-
-  // api.registerGenerator({
-  //   key: "apollo:page",
-  //   name: "Create .editorconfig",
-  //   description: "Setup editorconfig config",
-  //   type: GeneratorType.generate,
-  //   fn: () => {},
-  // });
-
-  // api.registerGenerator({
-  //   key: 'apollo:page',
-  //   Generator: pageBycommands(api),
-  // });
-
-  // api.addUmiExports(() => ({
-  //   exportAll: true,
-  //   source: api.utils.winPath(join(pluginTmpDir, 'exports')),
-  // }));
 }
