@@ -1,3 +1,12 @@
+# [0.3.0](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.2.6...v0.3.0) (2024-02-27)
+
+
+### Features
+
+* Update package.json and file paths ([1719073](https://github.com/limaofeng/umi-plugin-apollo/commit/1719073e8f5d917f0f254fd595d5b700cf0a5e1c))
+
+
+
 ## [0.2.6](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.2.5...v0.2.6) (2024-02-26)
 
 
