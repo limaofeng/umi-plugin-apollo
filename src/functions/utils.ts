@@ -108,7 +108,6 @@ export const getOptionsFileInternal = (
       defaultOptionsTemplatePath,
       "utf-8",
     );
-    console.error("defaultOptionsTemplatePath", defaultOptionsTemplatePath);
     api.writeTmpFile({
       path: "options.ts",
       content: Mustache.render(defaultOptionsContent, {
