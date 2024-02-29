@@ -64,3 +64,5 @@ export const apolloProvider = options.makeProvider
         {children}
       </ApolloProvider>
     );
+
+export { default as tokenHelper } from './TokenHelper'

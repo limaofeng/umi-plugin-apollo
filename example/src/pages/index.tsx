@@ -17,12 +17,13 @@ const CONTINENTS_QUERY = gql`
   }
 `;
 
-export default function HomePage() {
+export default function HomePage(props: any) {
 
   const { data, error, loading } = useQuery(CONTINENTS_QUERY);
 
   console.log('data', data)
 
+  console.log('HomePage', props);
 
   if (error) {
     return <div>Error loading data.</div>;
