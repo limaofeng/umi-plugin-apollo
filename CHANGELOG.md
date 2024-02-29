@@ -1,3 +1,12 @@
+## [0.4.5](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.4.4...v0.4.5) (2024-02-29)
+
+
+### Bug Fixes
+
+*  解决 tokenHelper 导出问题 ([57a3700](https://github.com/limaofeng/umi-plugin-apollo/commit/57a370039a3a08c131bc7c9d985244ddea9cc7b0))
+
+
+
 ## [0.4.4](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.4.3...v0.4.4) (2024-02-28)
 
 
