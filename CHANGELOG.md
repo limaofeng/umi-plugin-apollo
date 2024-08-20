@@ -1,3 +1,7 @@
+# [0.5.0](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.4.6...v0.5.0) (2024-08-20)
+
+
+
 ## [0.4.6](https://github.com/limaofeng/umi-plugin-apollo/compare/v0.4.5...v0.4.6) (2024-08-20)
 
 
