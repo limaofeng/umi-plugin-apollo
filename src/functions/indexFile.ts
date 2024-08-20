@@ -19,6 +19,7 @@ export default (api: IApi, bag: IBag) =>
       path: indexPath,
       content: Mustache.render(indexTemplate, {
         OptionsFile: optionsFile,
+        tokenFile: winPath(bag.tokenFile!),
         logging: options.logging,
       }),
     });

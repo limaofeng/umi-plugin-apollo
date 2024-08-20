@@ -10,7 +10,7 @@ import generatePageResolversFile from "./functions/pageResolversFile";
 import generatePageSchemaFile from "./functions/pageSchemaFile";
 import generateRuntimeFile from "./functions/runtimeFile";
 import generateLinkFile from "./functions/linkFile";
-import { getOptionsFile } from "./functions/utils";
+import { getOptionsFile, getTokenFile } from "./functions/utils";
 
 const joinApolloPath = (api: IApi) => (path: string) =>
   join(api.paths.absTmpPath!, "plugin-apollo", path);
@@ -29,6 +29,7 @@ export interface IOptions {
   mock: boolean;
   logging: boolean;
   options: string;
+  token: string;
 }
 
 const joinTemplatePath = (path: string) =>
@@ -48,6 +49,7 @@ const cenerateFile = (api: IApi, fileName: string) =>
 
 export interface IBag {
   generateOptionsFile: () => void;
+  generateTokenFile: () => void;
   schemas: any;
   resolvers: any;
   joinApolloPath: (path: string) => string;
@@ -56,6 +58,7 @@ export interface IBag {
   joinSrcPath: (path: string) => string;
   joinAbsSrcPath: (path: string) => string;
   optionsFile: string;
+  tokenFile: string;
 }
 
 class Bag {
@@ -64,6 +67,8 @@ class Bag {
   private api: IApi;
   private _optionsFile: any;
   private _generateOptionsFile: any;
+  private _tokenFile: any;
+  private _generateTokenFile: any;
   constructor({ api, ...data }: any) {
     for (const key of Object.keys(data)) {
       (this as any)[key] = data[key];
@@ -78,12 +83,27 @@ class Bag {
     this._optionsFile = optionsFilename;
     this._generateOptionsFile = generateOptionsFile;
   }
+  private queryTokenFile() {
+    const { tokenFilename, generateTokenFile } = getTokenFile(
+      this as any,
+      this.api,
+    );
+    this._tokenFile = tokenFilename;
+    this._generateTokenFile = generateTokenFile;
+  }
   get optionsFile() {
     if (this._optionsFile) {
       return this._optionsFile;
     }
     this.queryOptionsFile();
     return this._optionsFile;
+  }
+  get tokenFile() {
+    if (this._tokenFile) {
+      return this._tokenFile;
+    }
+    this.queryTokenFile();
+    return this._tokenFile;
   }
   get generateOptionsFile() {
     if (this._generateOptionsFile) {
@@ -92,11 +112,17 @@ class Bag {
     this.queryOptionsFile();
     return this._generateOptionsFile;
   }
+  get generateTokenFile() {
+    if (this._generateTokenFile) {
+      return this._generateTokenFile;
+    }
+    this.queryTokenFile();
+    return this._generateTokenFile;
+  }
 }
 
 export default function (api: IApi) {
   const apolloFiles = parseApolloFiles(api);
-  const pluginTmpDir = join(api.paths.absTmpPath!, "apollo");
   const schemas = apolloFiles.filter((x) => x.fileType === "Schema");
   const resolvers = apolloFiles.filter((x) => x.fileType === "Resolvers");
 
@@ -159,12 +185,9 @@ export default function (api: IApi) {
     if (!existsSync(apolloPath)) {
       mkdirSync(apolloPath);
     }
+    bag.generateTokenFile();
     bag.generateOptionsFile();
   });
-
-  const files = ["TokenHelper.ts"];
-
-  files.map((fileName) => cenerateFile(api, fileName));
 
   generateIndexFile(api, bag);
   generatePageSchemaFile(api, bag);

@@ -65,4 +65,4 @@ export const apolloProvider = options.makeProvider
       </ApolloProvider>
     );
 
-export { default as tokenHelper } from './TokenHelper'
+export { default as tokenHelper } from '{{{tokenFile}}}'

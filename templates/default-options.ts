@@ -2,7 +2,7 @@ import { setContext } from "apollo-link-context";
 import { onError } from "apollo-link-error";
 import apolloLogger from "apollo-link-logger";
 
-import tokenHelper from "./TokenHelper";
+import tokenHelper from "{{{tokenFile}}}";
 
 const logging = JSON.parse("{{logging}}");
 const token = true;
@@ -40,8 +40,15 @@ if (token) {
 }
 
 const errorLink = onError((error) => {
-  const { graphQLErrors } = error;
-  if (graphQLErrors?.some((err) => err.extensions?.code === "100401")) {
+  const { graphQLErrors, networkError } = error;
+  if (networkError) {
+    console.error(`[Network error]: ${networkError}`);
+    // 判断并处理不同类型的网络错误
+    if (networkError.statusCode === 401) {
+      token && tokenHelper.resetToken();
+    }
+  }
+  if (graphQLErrors?.some((err) => err.extensions?.code.startsWith("401"))) {
     token && tokenHelper.resetToken();
   }
 });

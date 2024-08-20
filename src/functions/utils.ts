@@ -5,7 +5,7 @@ import { Mustache } from "@umijs/utils";
 import _ from "lodash";
 import type { IApi } from "umi";
 import globby from "globby";
-
+import { winPath } from "@umijs/utils";
 import { IBag, IOptions } from "..";
 
 export const capitalizeFirstLetter = (x: string) =>
@@ -79,10 +79,11 @@ export const parseApolloFiles = (api: IApi) =>
     });
 
 export const getOptionsFileInternal = (
-  { joinAbsApolloPath, joinApolloTemplatePath, joinAbsSrcPath }: IBag,
+  bag: IBag,
   api: IApi,
 ) => {
   const { config } = api;
+  const { joinAbsApolloPath, joinApolloTemplatePath, joinAbsSrcPath } = bag;
   const apolloPath = joinAbsApolloPath("");
   const srcPath = joinAbsSrcPath("");
   const opts: IOptions = config.apollo;
@@ -108,9 +109,11 @@ export const getOptionsFileInternal = (
       defaultOptionsTemplatePath,
       "utf-8",
     );
+    const tokenFile = winPath(bag.tokenFile!);
     api.writeTmpFile({
       path: "options.ts",
       content: Mustache.render(defaultOptionsContent, {
+        tokenFile,
         logging: opts.logging,
       }),
     });
@@ -133,5 +136,63 @@ export const getOptionsFile = (bag: IBag, api: IApi) => {
   return {
     optionsFilename,
     generateOptionsFile,
+  };
+};
+
+export const getTokenFileInternal = (
+  { joinAbsApolloPath, joinApolloTemplatePath, joinAbsSrcPath }: IBag,
+  api: IApi,
+) => {
+  const { config } = api;
+  const apolloPath = joinAbsApolloPath("");
+  const srcPath = joinAbsSrcPath("");
+  const opts: IOptions = config.apollo;
+
+  let generateTokenFile = (): void => undefined;
+  let tokenFilename;
+
+  if (opts.token) {
+    tokenFilename = relative(apolloPath, resolve(srcPath, opts.token));
+    return {
+      tokenFilename,
+      generateTokenFile,
+    };
+  }
+
+  const defaultTokenPath = joinAbsApolloPath("token");
+  tokenFilename = "./" + relative(apolloPath, defaultTokenPath);
+
+  generateTokenFile = (): void => {
+    const defaultTokenTemplatePath =
+      joinApolloTemplatePath("default-token.ts");
+    const defaultTokenContent = readFileSync(
+      defaultTokenTemplatePath,
+      "utf-8",
+    );
+    api.writeTmpFile({
+      path: "token.ts",
+      content: Mustache.render(defaultTokenContent, {
+        logging: opts.logging,
+      }),
+    });
+  };
+
+  return {
+    tokenFilename,
+    generateTokenFile,
+  };
+};
+
+export const getTokenFile = (bag: IBag, api: IApi) => {
+  if (!api.config.apollo) {
+    throw new Error("未读取到配置");
+  }
+  const { tokenFilename, generateTokenFile } = getTokenFileInternal(
+    bag,
+    api,
+  );
+  return {
+    tokenFilename,
+    generateTokenFile,
   };
 };

@@ -88,6 +88,7 @@ export default (api: IApi, bag: IBag) =>
         path: linkPath,
         content: Mustache.render(linkTemplate, {
           optionsFile: optionsFile,
+          tokenFile: winPath(bag.tokenFile!),
           url: options.url,
           wsUrl: options.wsUrl,
         }),

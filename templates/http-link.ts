@@ -6,7 +6,7 @@ import { WebSocketLink } from "@apollo/client/link/ws";
 import { SubscriptionClient } from "subscriptions-transport-ws";
 import axios from "axios";
 
-import tokenHelper from "./TokenHelper";
+import tokenHelper from "{{{tokenFile}}}";
 
 import * as options from "{{{optionsFile}}}";
 
