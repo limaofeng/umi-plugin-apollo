@@ -121,6 +121,12 @@ class Bag {
   }
 }
 
+const protocol = window.location.protocol;       // 获取当前页面的协议 (http: 或 https:)
+const host = window.location.host;               // 获取当前页面的主机名和端口 (例如 localhost:3000)
+// 根据协议生成 WebSocket URL
+// 将 http: 替换为 ws:，将 https: 替换为 wss:
+const wsProtocol = protocol === "https:" ? "wss:" : "ws:";
+
 export default function (api: IApi) {
   const apolloFiles = parseApolloFiles(api);
   const schemas = apolloFiles.filter((x) => x.fileType === "Schema");
@@ -132,9 +138,8 @@ export default function (api: IApi) {
     key: "apollo",
     config: {
       default: {
-        url: process.env.GRAPHQL_URL || "http://localhost:3000/graphql",
-        wsUrl:
-          process.env.GRAPHQL_WS_URL || "ws://localhost:3000/subscriptions",
+        url: process.env.GRAPHQL_URL || `${protocol}//${host}/graphql`,
+        wsUrl: process.env.GRAPHQL_WS_URL || `${wsProtocol}//${host}/subscriptions`,
         mock:
           ["true", "1", "yes"].indexOf(
             (process.env.MOCK || "false").toLowerCase(),
@@ -168,7 +173,7 @@ export default function (api: IApi) {
     const GQL_REG = /\.(graphql|gql)$/
 
     memo.module.rule('asset').exclude.add(GQL_REG).end();
-    
+
     memo.module
       .rule('graphql')
       .test(GQL_REG)
