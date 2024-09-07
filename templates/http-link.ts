@@ -12,11 +12,11 @@ import * as options from "{{{optionsFile}}}";
 
 const protocol = window.location.protocol;       // 获取当前页面的协议 (http: 或 https:)
 const host = window.location.host;               // 获取当前页面的主机名和端口 (例如 localhost:3000)
-const graphqlUrl = `${protocol}//${host}${window.APP_CONFIG.GRAPHQL_URL}`;
+const graphqlUrl = process.env.GRAPHQL_URL || `${protocol}//${host}/graphql`;
 // 根据协议生成 WebSocket URL
 // 将 http: 替换为 ws:，将 https: 替换为 wss:
 const wsProtocol = protocol === "https:" ? "wss:" : "ws:";
-const graphqlWsUrl = `${wsProtocol}//${host}/subscriptions`;
+const graphqlWsUrl = process.env.GRAPHQL_WS_URL || `${wsProtocol}//${host}/subscriptions`;
 
 let url = "{{{url}}}";
 let wsUrl = "{{{wsUrl}}}";
@@ -26,16 +26,14 @@ const httpLinkOptions = options.httpLinkOptions || {};
 if (window.APP_CONFIG) {
   ['GRAPHQL_URL', 'GRAPHQL_WS_URL'].forEach((key) => {
     const value = window.APP_CONFIG[key];
+    const defaultValue = key === 'GRAPHQL_URL' ? graphqlUrl : graphqlWsUrl;
     if (typeof value === 'string' && value.startsWith('REPLACE_')) {
        // 从 process.env 中查找对应的环境变量
-       const envValue = process.env[key];
-       window.APP_CONFIG[key] = envValue || ''
+       window.APP_CONFIG[key] = defaultValue
     }
   });
   url = url || window.APP_CONFIG.GRAPHQL_URL || graphqlUrl;
   wsUrl = url || window.APP_CONFIG.GRAPHQL_WS_URL || graphqlWsUrl;
-  delete (window.APP_CONFIG as any).GRAPHQL_URL;
-  delete (window.APP_CONFIG as any).GRAPHQL_WS_URL;
 }
 
 const createDefaultHttpLink = () => {
