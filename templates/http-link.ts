@@ -16,11 +16,8 @@ const host = window.location.host;               // 获取当前页面的主机�
 // 将 http: 替换为 ws:，将 https: 替换为 wss:
 const wsProtocol = protocol === "https:" ? "wss:" : "ws:";
 
- // || `${protocol}//${host}/graphql`,
- // || `${wsProtocol}//${host}/subscriptions`,
-
-const url = "{{{url}}}";
-const wsUrl = "{{{wsUrl}}}";
+const url = "{{{url}}}" || `${protocol}//${host}/graphql`;
+const wsUrl = "{{{wsUrl}}}" || `${wsProtocol}//${host}/subscriptions`;
 const httpLinkOptions = options.httpLinkOptions || {};
 
 const createDefaultHttpLink = () => {
