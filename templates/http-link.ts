@@ -12,16 +12,31 @@ import * as options from "{{{optionsFile}}}";
 
 const protocol = window.location.protocol;       // 获取当前页面的协议 (http: 或 https:)
 const host = window.location.host;               // 获取当前页面的主机名和端口 (例如 localhost:3000)
+const graphqlUrl = `${protocol}//${host}${window.APP_CONFIG.GRAPHQL_URL}`;
 // 根据协议生成 WebSocket URL
 // 将 http: 替换为 ws:，将 https: 替换为 wss:
 const wsProtocol = protocol === "https:" ? "wss:" : "ws:";
+const graphqlWsUrl = `${wsProtocol}//${host}/subscriptions`;
 
-const url = "{{{url}}}" || window.APP_CONFIG.GRAPHQL_URL || `${protocol}//${host}/graphql`;
-const wsUrl = "{{{wsUrl}}}" || window.APP_CONFIG.GRAPHQL_WS_URL || `${wsProtocol}//${host}/subscriptions`;
+let url = "{{{url}}}";
+let wsUrl = "{{{wsUrl}}}";
 const httpLinkOptions = options.httpLinkOptions || {};
 
-delete (window.APP_CONFIG as any).GRAPHQL_URL;
-delete (window.APP_CONFIG as any).GRAPHQL_WS_URL;
+// 如果 APP_CONFIG 存在，且 GRAPHQL_URL 和 GRAPHQL_WS_URL 不存在，则使用默认值
+if (window.APP_CONFIG) {
+  ['GRAPHQL_URL', 'GRAPHQL_WS_URL'].forEach((key) => {
+    const value = window.APP_CONFIG[key];
+    if (typeof value === 'string' && value.startsWith('REPLACE_')) {
+       // 从 process.env 中查找对应的环境变量
+       const envValue = process.env[key];
+       window.APP_CONFIG[key] = envValue || ''
+    }
+  });
+  url = url || window.APP_CONFIG.GRAPHQL_URL || graphqlUrl;
+  wsUrl = url || window.APP_CONFIG.GRAPHQL_WS_URL || graphqlWsUrl;
+  delete (window.APP_CONFIG as any).GRAPHQL_URL;
+  delete (window.APP_CONFIG as any).GRAPHQL_WS_URL;
+}
 
 const createDefaultHttpLink = () => {
   const remoteLink = createUploadLink({
@@ -71,9 +86,6 @@ export default httpLink;
 
 declare global {
   interface Window {
-    APP_CONFIG: {
-      GRAPHQL_URL: string;
-      GRAPHQL_WS_URL: string;
-    };
+    APP_CONFIG: any;
   }
 }
