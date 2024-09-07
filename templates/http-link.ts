@@ -10,6 +10,15 @@ import tokenHelper from "{{{tokenFile}}}";
 
 import * as options from "{{{optionsFile}}}";
 
+const protocol = window.location.protocol;       // 获取当前页面的协议 (http: 或 https:)
+const host = window.location.host;               // 获取当前页面的主机名和端口 (例如 localhost:3000)
+// 根据协议生成 WebSocket URL
+// 将 http: 替换为 ws:，将 https: 替换为 wss:
+const wsProtocol = protocol === "https:" ? "wss:" : "ws:";
+
+ // || `${protocol}//${host}/graphql`,
+ // || `${wsProtocol}//${host}/subscriptions`,
+
 const url = "{{{url}}}";
 const wsUrl = "{{{wsUrl}}}";
 const httpLinkOptions = options.httpLinkOptions || {};
