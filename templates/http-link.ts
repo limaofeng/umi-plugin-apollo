@@ -16,9 +16,12 @@ const host = window.location.host;               // 获取当前页面的主机�
 // 将 http: 替换为 ws:，将 https: 替换为 wss:
 const wsProtocol = protocol === "https:" ? "wss:" : "ws:";
 
-const url = "{{{url}}}" || `${protocol}//${host}/graphql`;
-const wsUrl = "{{{wsUrl}}}" || `${wsProtocol}//${host}/subscriptions`;
+const url = "{{{url}}}" || window.APP_CONFIG.GRAPHQL_URL || `${protocol}//${host}/graphql`;
+const wsUrl = "{{{wsUrl}}}" || window.APP_CONFIG.GRAPHQL_WS_URL || `${wsProtocol}//${host}/subscriptions`;
 const httpLinkOptions = options.httpLinkOptions || {};
+
+delete (window.APP_CONFIG as any).GRAPHQL_URL;
+delete (window.APP_CONFIG as any).GRAPHQL_WS_URL;
 
 const createDefaultHttpLink = () => {
   const remoteLink = createUploadLink({
@@ -65,3 +68,12 @@ const httpLink = options.makeHttpLink
   : createDefaultHttpLink();
 
 export default httpLink;
+
+declare global {
+  interface Window {
+    APP_CONFIG: {
+      GRAPHQL_URL: string;
+      GRAPHQL_WS_URL: string;
+    };
+  }
+}
